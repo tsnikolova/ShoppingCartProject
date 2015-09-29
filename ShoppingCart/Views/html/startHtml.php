@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>—борник по математика</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../../../bootstrap/css/bootstrap-theame2.min.css">
     <!--<link rel="stylesheet" href="/css/styles.css"> -->
