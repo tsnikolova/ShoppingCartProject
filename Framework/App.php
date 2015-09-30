@@ -65,7 +65,7 @@ class App
             $this->frontController->setRouter(new DefaultRouter());
         }
         $session = $this->config->app['session'];
-        if ($session['autoload']) {
+        if ($session['autostart']) {
             switch ($session['type']) {
                 case 'native':
                     $s = new NativeSession($session['name'], $session['lifetime'], $session['path'],
