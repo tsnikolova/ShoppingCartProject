@@ -26,7 +26,7 @@ class App
      * @var iSession
      */
     private $session = null;
-   /* private function __construct()
+    private function __construct()
     {
         set_exception_handler(array($this, 'exceptionHandler'));
         Loader::registerNamespace('GFramework', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -35,7 +35,7 @@ class App
         if ($this->getConfigFolder() == null) {
             $this->setConfigFolder('../config');
         }
-    }*/
+    }
     public function setConfigFolder($path)
     {
         $this->config->setConfigFolder($path);
@@ -65,7 +65,7 @@ class App
             $this->frontController->setRouter(new DefaultRouter());
         }
         $session = $this->config->app['session'];
-        if ($session['autostart']) {
+        if ($session['autoload']) {
             switch ($session['type']) {
                 case 'native':
                     $s = new NativeSession($session['name'], $session['lifetime'], $session['path'],

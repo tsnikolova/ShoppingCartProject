@@ -31,13 +31,13 @@ class FrontController
         $router = $this->getRouter();
         $uri = $router->getUri();
         $routesConfig = App::getInstance()->getConfig()->routes;
-        $packegeConfig = null;
+        $packageConfig = null;
         if (is_array($routesConfig) && count($routesConfig) > 0) {
-            foreach ($routesConfig as $packege => $content) {
-                if (($uri == $packege || stripos($uri, $packege . '/') === 0) && $content['namespace']) {
+            foreach ($routesConfig as $package => $content) {
+                if (($uri == $package || stripos($uri, $package . '/') === 0) && $content['namespace']) {
                     $this->namespace = $content['namespace'];
-                    $uri = substr($uri, strlen($packege) + 1);
-                    $packegeConfig = $content;
+                    $uri = substr($uri, strlen($package) + 1);
+                    $packageConfig = $content;
                     break;
                 }
             }
@@ -46,7 +46,7 @@ class FrontController
         }
         if ($this->namespace == null && $routesConfig['*']['namespace']) {
             $this->namespace = $routesConfig['*']['namespace'];
-            $packegeConfig = $routesConfig['*'];
+            $packageConfig = $routesConfig['*'];
         } else if ($this->namespace == null && !$routesConfig['*']['namespace']) {
             throw new \Exception('Default route missing', 500);
         }
@@ -66,20 +66,21 @@ class FrontController
             $this->controller = $this->getDefaultController();
             $this->method = $this->getDefaultMethod();
         }
-        if ($packegeConfig['controllers'] && is_array($packegeConfig['controllers'])) {
-            $controller = $packegeConfig['controllers'][$this->controller];
+        if ($packageConfig['controllers'] && is_array($packageConfig['controllers'])) {
+            $controller = $packageConfig['controllers'][$this->controller];
             if ($controller['methods'][$this->method]) {
                 $this->method = strtolower($controller['methods'][$this->method]);
             }
-            if (isset($packegeConfig['controllers'][$this->controller]['newName'])) {
+            if (isset($packageConfig['controllers'][$this->controller]['newName'])) {
                 $this->controller = strtolower($controller['newName']);
             }
         }
         $input->setPost($this->router->getPost());
         $this->controller = ucfirst($this->controller);
         $controllerFile = "{$this->namespace}\\{$this->controller}";
-        $controllerObj = new $controllerFile();
-        $controllerObj->{$this->method}();
+
+        /*$controllerObj = new $controllerFile();
+        $controllerObj->{$this->method}();*/
     }
     public function getDefaultController()
     {
