@@ -1,4 +1,4 @@
-<?= $this->getLayoutData('startPage'); ?>
+<?= $this->getLayoutData('startHtml'); ?>
 <?= $this->getLayoutData('header'); ?>
 <?= $this->getLayoutData('menu'); ?>
     <div class="container">
@@ -38,4 +38,4 @@
             </div>
         </div>
     </div>
-<?= $this->getLayoutData('endPage'); ?>
+<?= $this->getLayoutData('endHtml'); ?>
